@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    {"id": "grid-breaker", "kind": "isolation", "requires": []},
+    {"id": "forming-pcs", "kind": "source", "requires": ["grid-breaker"]},
+    {"id": "critical-bus", "kind": "bus", "requires": ["forming-pcs"]},
+    {"id": "cold-store", "kind": "load", "requires": ["critical-bus"]}
+  ],
+  "responses": [
+    {"command_id": "open-01", "device": "grid-breaker", "status": "confirmed", "delay_seconds": 3},
+    {"command_id": "start-02", "device": "forming-pcs", "status": "confirmed", "delay_seconds": 18},
+    {"command_id": "close-03", "device": "cold-store", "status": "rejected", "delay_seconds": 2}
+  ]
+}
