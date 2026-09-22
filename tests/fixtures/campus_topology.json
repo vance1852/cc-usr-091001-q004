@@ -1,0 +1,20 @@
+{
+  "nodes": [
+    {"id": "grid-breaker", "kind": "isolation", "requires": [],
+     "description": "并网点隔离开关"},
+    {"id": "diesel-gen", "kind": "source", "requires": ["grid-breaker"],
+     "restorable": false, "description": "柴油发电机：仅人工程序，禁止自动并令"},
+    {"id": "forming-pcs", "kind": "source", "requires": ["grid-breaker"],
+     "description": "构网型储能 PCS"},
+    {"id": "critical-bus", "kind": "bus", "requires": ["forming-pcs"],
+     "description": "关键母线"},
+    {"id": "emergency-lighting", "kind": "load", "requires": ["critical-bus"],
+     "priority": 5},
+    {"id": "cold-store", "kind": "load", "requires": ["critical-bus"],
+     "priority": 10},
+    {"id": "process-line", "kind": "load", "requires": ["critical-bus"],
+     "priority": 50, "description": "关键产线"},
+    {"id": "office-load", "kind": "load", "requires": ["critical-bus"],
+     "priority": 90}
+  ]
+}
